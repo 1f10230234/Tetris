@@ -8,7 +8,7 @@ const tmino: number[][] = [
   [-1, 0],
 ];
 const smino: number[][] = [
-  [0, 0],
+  //[0, 0],
   [-1, -1],
   [0, 1],
   [-1, 0],
@@ -62,7 +62,7 @@ export const Block = (props: { color: string; onClick: (color: string) => void }
       return x === n;
     }).length;
   };
-  return tmino.map((cell) => (
+  return smino.map((cell) => (
     <div
       className={styles.block}
       style={{
