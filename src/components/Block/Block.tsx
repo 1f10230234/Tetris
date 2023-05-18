@@ -7,10 +7,47 @@ const tmino: number[][] = [
   [0, 1],
   [-1, 0],
 ];
-const colors = ['#f00', '#0f0', '#00f'];
+const smino: number[][] = [
+  [0, 0],
+  [-1, -1],
+  [0, 1],
+  [-1, 0],
+];
+const zmino: number[][] = [
+  [0, 0],
+  [0, -1],
+  [-1, 1],
+  [-1, 0],
+];
+const jmino: number[][] = [
+  [0, 0],
+  [0, -1],
+  [0, 1],
+  [-1, -1],
+];
+const lmino: number[][] = [
+  [0, 0],
+  [0, -1],
+  [0, 1],
+  [-1, 1],
+];
+const imino: number[][] = [
+  [0, 0],
+  [0, -1],
+  [0, 1],
+  [0, 2],
+];
+const omino: number[][] = [
+  [0, 0],
+  [0, 1],
+  [1, 0],
+  [1, 1],
+];
+
+const colors = ['#f00', '#0f0', '#00f', '#000'];
 export const Block = (props: { color: string; onClick: (color: string) => void }) => {
   const [count, setCount] = useState(0);
-  const [input, setInput] = useState([1, 1]);
+  const [input, setInput] = useState([]);
   const newInputs: number[] = JSON.parse(JSON.stringify(input));
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -20,52 +57,28 @@ export const Block = (props: { color: string; onClick: (color: string) => void }
       clearInterval(intervalId);
     };
   }, []);
-
-  return tmino.map((cell, i) => (
+  const countNum = (n: number) => {
+    return newInputs.filter(function (x) {
+      return x === n;
+    }).length;
+  };
+  return tmino.map((cell) => (
     <div
       className={styles.block}
       style={{
         background: props.color,
         top:
-          count * 30 +
-          30 *
-            cell[
-              newInputs.filter(function (x) {
-                return x === 1;
-              }).length % 2
-            ] *
-            (-1) **
-              Math.floor(
-                (newInputs.filter(function (x) {
-                  return x === 1;
-                }).length +
-                  i) /
-                  2
-              ),
+          60 +
+          //count * 30 +
+          30 * cell[countNum(1) % 2] * ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1)),
 
-        left:
-          30 *
-            cell[
-              1 -
-                (newInputs.filter(function (x) {
-                  return x === 1;
-                }).length %
-                  2)
-            ] *
-            (-1) **
-              Math.floor(
-                1 -
-                  (newInputs.filter(function (x) {
-                    return x === 1;
-                  }).length +
-                    i) /
-                    2
-              ) +
-          60,
+        left: 30 * cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60,
       }}
       key={`${cell}`}
       onClick={() => {
-        props.onClick(colors[newInputs.length % 3]);
+        props.onClick(colors[newInputs.length % colors.length]);
+        newInputs.push(1);
+        newInputs.push(1);
         newInputs.push(1);
         setInput(newInputs);
         console.log(newInputs);
