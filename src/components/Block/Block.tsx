@@ -5,7 +5,7 @@ import styles from '../block.module.css';
 const colors = ['#f00', '#0f0', '#00f', '#000'];
 export const Block = (props: { color: string; onClick: (color: string) => void }) => {
   const [count, setCount] = useState(0);
-  const [input, setInput] = useState([]);
+  const [input, setInput] = useState([0]);
   const newInputs: number[] = JSON.parse(JSON.stringify(input));
   useEffect(() => {
     const intervalId = setInterval(() => {
