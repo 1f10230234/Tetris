@@ -1,48 +1,6 @@
 import { useEffect, useState } from 'react';
+import { mino } from '../../utils/mino';
 import styles from '../block.module.css';
-
-const tmino: number[][] = [
-  [0, 0],
-  [0, -1],
-  [0, 1],
-  [-1, 0],
-];
-const smino: number[][] = [
-  //[0, 0],
-  [-1, -1],
-  [0, 1],
-  [-1, 0],
-];
-const zmino: number[][] = [
-  [0, 0],
-  [0, -1],
-  [-1, 1],
-  [-1, 0],
-];
-const jmino: number[][] = [
-  [0, 0],
-  [0, -1],
-  [0, 1],
-  [-1, -1],
-];
-const lmino: number[][] = [
-  [0, 0],
-  [0, -1],
-  [0, 1],
-  [-1, 1],
-];
-const imino: number[][] = [
-  [0, 0],
-  [0, -1],
-  [0, 1],
-  [0, 2],
-];
-const omino: number[][] = [
-  [0, 0],
-  [0, 1],
-  [1, 0],
-  [1, 1],
-];
 
 const colors = ['#f00', '#0f0', '#00f', '#000'];
 export const Block = (props: { color: string; onClick: (color: string) => void }) => {
@@ -62,20 +20,28 @@ export const Block = (props: { color: string; onClick: (color: string) => void }
       return x === n;
     }).length;
   };
-  return smino.map((cell) => (
+  const froatMino: number[][] = mino[Math.floor(count / 20) % 7].shape;
+  return froatMino.map((cell) => (
     <div
       className={styles.block}
       style={{
         background: props.color,
         top:
           60 +
-          //count * 30 +
+          (count % 20) * 30 +
           30 * cell[countNum(1) % 2] * ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1)),
 
         left: 30 * cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60,
       }}
       key={`${cell}`}
       onClick={() => {
+        props.onClick(colors[newInputs.length % colors.length]);
+        newInputs.push(1);
+        setInput(newInputs);
+        console.log(newInputs);
+      }}
+      onContextMenu={(event) => {
+        event.preventDefault();
         props.onClick(colors[newInputs.length % colors.length]);
         newInputs.push(1);
         newInputs.push(1);
