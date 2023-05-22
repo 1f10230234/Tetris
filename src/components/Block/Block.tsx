@@ -25,36 +25,42 @@ export const Block = (props: {
     }).length;
   };
   const froatMino: number[][] = mino[Math.floor(count / 20) % 7].shape;
-  return froatMino.map((cell) => (
-    <div
-      className={styles.block}
-      style={{
-        background: props.color,
-        top:
-          60 +
-          //(count % 20) * 30 +
-          30 *
-            Math.floor(
-              cell[countNum(1) % 2] * ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1))
-            ),
+  return (
+    <>
+      {froatMino.map((cell) => (
+        <div
+          className={styles.block}
+          style={{
+            background: props.color,
+            top:
+              60 +
+              //(count % 20) * 30 +
+              30 *
+                Math.floor(
+                  cell[countNum(1) % 2] *
+                    ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1))
+                ),
 
-        left:
-          30 * Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
-      }}
-      key={`${cell}`}
-      onClick={() => {
-        newInputs.push(1);
-        props.onClick(colors[newInputs.length % colors.length]);
-        setInput(newInputs);
-      }}
-      onContextMenu={(event) => {
-        event.preventDefault();
-        newInputs.push(1);
-        newInputs.push(1);
-        newInputs.push(1);
-        props.onClick(colors[newInputs.length % colors.length]);
-        setInput(newInputs);
-      }}
-    />
-  ));
+            left:
+              30 *
+              Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
+          }}
+          key={`${cell}`}
+          onClick={() => {
+            newInputs.push(1);
+            props.onClick(colors[newInputs.length % colors.length]);
+            setInput(newInputs);
+          }}
+          onContextMenu={(event) => {
+            event.preventDefault();
+            newInputs.push(1);
+            newInputs.push(1);
+            newInputs.push(1);
+            props.onClick(colors[newInputs.length % colors.length]);
+            setInput(newInputs);
+          }}
+        />
+      ))}
+    </>
+  );
 };
