@@ -6,7 +6,9 @@ const Home = () => {
   const [color, setColor] = useState('#0f0');
   return (
     <div className={styles.container}>
-      <main className={styles.main}>{<Block color={color} onClick={setColor} />}</main>
+      <main className={styles.main}>
+        {<Block color={color} onClick={setColor} onContextMenu={setColor} />}
+      </main>
     </div>
   );
 };

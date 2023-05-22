@@ -3,7 +3,11 @@ import { mino } from '../../utils/mino';
 import styles from '../block.module.css';
 
 const colors = ['#f00', '#0f0', '#00f', '#000'];
-export const Block = (props: { color: string; onClick: (color: string) => void }) => {
+export const Block = (props: {
+  color: string;
+  onClick: (color: string) => void;
+  onContextMenu: (color: string) => void;
+}) => {
   const [count, setCount] = useState(0);
   const [input, setInput] = useState([0]);
   const newInputs: number[] = JSON.parse(JSON.stringify(input));
@@ -28,26 +32,28 @@ export const Block = (props: { color: string; onClick: (color: string) => void }
         background: props.color,
         top:
           60 +
-          (count % 20) * 30 +
-          30 * cell[countNum(1) % 2] * ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1)),
+          //(count % 20) * 30 +
+          30 *
+            Math.floor(
+              cell[countNum(1) % 2] * ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1))
+            ),
 
-        left: 30 * cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60,
+        left:
+          30 * Math.floor(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
       }}
       key={`${cell}`}
       onClick={() => {
-        props.onClick(colors[newInputs.length % colors.length]);
         newInputs.push(1);
+        props.onClick(colors[newInputs.length % colors.length]);
         setInput(newInputs);
-        console.log(newInputs);
       }}
       onContextMenu={(event) => {
         event.preventDefault();
+        newInputs.push(1);
+        newInputs.push(1);
+        newInputs.push(1);
         props.onClick(colors[newInputs.length % colors.length]);
-        newInputs.push(1);
-        newInputs.push(1);
-        newInputs.push(1);
         setInput(newInputs);
-        console.log(newInputs);
       }}
     />
   ));
