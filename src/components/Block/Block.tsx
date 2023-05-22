@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { mino } from '../../utils/mino';
-import styles from '../block.module.css';
+import styles from './block.module.css';
 
 const colors = ['#f00', '#0f0', '#00f', '#000'];
 export const Block = (props: {
@@ -39,7 +39,7 @@ export const Block = (props: {
             ),
 
         left:
-          30 * Math.floor(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
+          30 * Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
       }}
       key={`${cell}`}
       onClick={() => {
