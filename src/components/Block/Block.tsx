@@ -14,7 +14,7 @@ export const Block = (props: {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCount((c) => c + 1);
-    }, 1000);
+    }, 100);
     return () => {
       clearInterval(intervalId);
     };
