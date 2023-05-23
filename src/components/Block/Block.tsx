@@ -42,8 +42,8 @@ export const Block = (props: {
                 ),
 
             left:
-              30 *
-              Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2) + 60),
+              30 * Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2)) +
+              60,
           }}
           key={`${cell}`}
           onClick={() => {
