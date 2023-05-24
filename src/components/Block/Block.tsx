@@ -1,29 +1,22 @@
 import { useEffect, useState } from 'react';
+import { usePosition } from '../../Hooks/usePosition';
+import { countNum } from '../../utils/countNum';
 import { mino } from '../../utils/mino';
 import styles from './block.module.css';
 
-const colors = ['#f00', '#0f0', '#00f', '#000'];
-export const Block = (props: {
-  color: string;
-  onClick: (color: string) => void;
-  onContextMenu: (color: string) => void;
-}) => {
+export const Block = () => {
   const [count, setCount] = useState(0);
-  const [input, setInput] = useState([0]);
-  const newInputs: number[] = JSON.parse(JSON.stringify(input));
+  const newPosition: number[] = usePosition();
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCount((c) => c + 1);
-    }, 100);
+    }, 1000);
     return () => {
       clearInterval(intervalId);
     };
   }, []);
-  const countNum = (n: number) => {
-    return newInputs.filter(function (x) {
-      return x === n;
-    }).length;
-  };
+  const routation: number = (countNum(1, newPosition) + countNum(3, newPosition) * 3) % 4;
+  const position: number = countNum(6, newPosition) - countNum(4, newPosition);
   const froatMino: number[][] = mino[Math.floor(count / 20) % 7].shape;
   return (
     <>
@@ -31,34 +24,23 @@ export const Block = (props: {
         <div
           className={styles.block}
           style={{
-            background: props.color,
             top:
               60 +
-              //(count % 20) * 30 +
+              (count % 20) * 30 +
               30 *
                 Math.floor(
-                  cell[countNum(1) % 2] *
-                    ((-1) ** Math.floor(countNum(1) / 2) * (-1) ** countNum(1))
+                  cell[routation % 2] * ((-1) ** Math.floor(routation / 2) * (-1) ** routation)
                 ),
 
             left:
-              30 * Math.ceil(cell[1 - (countNum(1) % 2)] * (-1) ** Math.floor(countNum(1) / 2)) +
+              120 +
+              30 * position +
+              30 * Math.ceil(cell[1 - (routation % 2)] * (-1) ** Math.floor(routation / 2)) +
               60,
+            backgroundColor: mino[Math.floor(count / 20) % 7].color,
+            borderColor: mino[Math.floor(count / 20) % 7].color,
           }}
           key={`${cell}`}
-          onClick={() => {
-            newInputs.push(1);
-            props.onClick(colors[newInputs.length % colors.length]);
-            setInput(newInputs);
-          }}
-          onContextMenu={(event) => {
-            event.preventDefault();
-            newInputs.push(1);
-            newInputs.push(1);
-            newInputs.push(1);
-            props.onClick(colors[newInputs.length % colors.length]);
-            setInput(newInputs);
-          }}
         />
       ))}
     </>
