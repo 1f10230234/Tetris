@@ -10,20 +10,26 @@ const conversion: { [key: number]: number } = {
   40: 2,
 };
 
+// const useRoutation = (n:number) => {
+//   const [position, setPosition] = useState([0]);
+//   const newPosition: number[] = JSON.parse(JSON.stringify(position));
+//   newPosition.push(n)
+// }
+
+// const keyFuns = [{keyCode:90,useFn:()=>{useRoutation(1)}}]
+
 export const usePosition = () => {
   const [position, setPosition] = useState([0]);
   const newPosition: number[] = JSON.parse(JSON.stringify(position));
   useEffect(() => {
-    const handleKeyDown = (event: any) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       Object.keys(conversion).map((key: string) => {
-        // console.log(event.keyCode, key, conversion[key]);
         if (String(event.keyCode) === key) {
           newPosition.push(conversion[Number(key)]);
-          setPosition(newPosition);
-          // console.log(newPosition);
           if (Math.abs(countNum(4, newPosition) - countNum(6, newPosition)) > 5) {
             newPosition.pop();
           }
+          setPosition(newPosition);
         }
       });
     };

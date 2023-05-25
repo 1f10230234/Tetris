@@ -1,8 +1,8 @@
-// import { useBoard } from '../../hooks/useBoard';
-// import styles from './Board.module.css';
+// import { useBoard } from '../../Hooks/useBoard';
+// import styles from './board.module.css';
 
 // export const Board = () => {
-//   const { board } = useBoard();
+//   const board:number[][]= useBoard();
 //   return (
 //     <div className={styles.board}>
 //       {board.map((row, y) =>
