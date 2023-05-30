@@ -1,47 +1,25 @@
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
-  height: 600px;
+  width: 302px;
+  height: 602px;
+  border: 1px solid;
 }
 
 .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+}
+
+.mino {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
   border: 10px ridge;
-}
-
-.color-1 {
-  background-color: #fbdb43;
-  border-color: #fbdb43;
-}
-
-.color-2 {
-  background-color: #37bcec;
-  border-color: #37bcec;
-}
-
-.color-3 {
-  background-color: #93338f;
-  border-color: #93338f;
-}
-
-.color-4 {
-  background-color: #e98e30;
-  border-color: #e98e30;
-}
-
-.color-5 {
-  background-color: #1c76bb;
-  border-color: #1c76bb;
-}
-
-.color-6 {
-  background-color: #7dba50;
-  border-color: #7dba50;
-}
-
-.color-7 {
-  background-color: #cc2828;
-  border-color: #cc2828;
 }
