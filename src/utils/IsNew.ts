@@ -7,11 +7,11 @@ export const isNew = (
     borderColor: string;
   }[]
 ) => {
+  // console.log('isNew');
   return position.every((mino) => {
     return board[mino.top] !== undefined && board[mino.top][mino.left] === 0;
   });
 };
-
 
 export const isUnder = (
   boardd: number[][],
@@ -24,5 +24,8 @@ export const isUnder = (
   inputss: number[],
   nn: number
 ) => {
+  // console.log('isUnder');
+  console.log(inputss[inputss.length - 1] === nn);
+  console.log(!isNew(boardd, positionn));
   return !isNew(boardd, positionn) && inputss[inputss.length - 1] === nn;
 };

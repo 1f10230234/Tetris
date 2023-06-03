@@ -4,6 +4,7 @@ import { statusMinoo } from '../../utils/statusMino';
 import styles from './floartMIno.module.css';
 
 export const FloartMino = () => {
+  console.log('FloatMino');
   const inputs = useBoard().exInputs;
   const statusMino = statusMinoo(
     inputs,

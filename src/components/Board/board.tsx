@@ -2,6 +2,7 @@ import { useBoard } from '../../Hooks/useBoard';
 import { mino } from '../../utils/mino';
 import styles from './board.module.css';
 export const Board = () => {
+  console.log('Board');
   const board = useBoard().exBoard;
   const minos = mino.map((b, a) => {
     return mino[a].color;

@@ -1,4 +1,9 @@
-export const createArray = (width: number, height: number, value: number): number[][] => {
+export const createArray = (
+  width: number,
+  height: number,
+  value: number
+): number[][] => {
+  // console.log('createArray');
   const array: number[][] = [];
   for (let i = 0; i < height; i++) {
     const row: number[] = [];
